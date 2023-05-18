@@ -1,0 +1,2 @@
+pandas 2.0.1
+medspacy 1.1.2
