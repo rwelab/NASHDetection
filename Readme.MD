@@ -1,6 +1,19 @@
-This is an internally validated, natural language processing-based algorithm for detecting patients with non-alcoholic steatohepatitis from clinical notes documented in electronic health records systems
+This is an internally validated, natural language processing-based algorithm for detecting patients with non-alcoholic steatohepatitis from clinical notes documented in electronic health records systems. An abstract detailing the methods for developing and validating this algorithm have been accepted for presentation at the American College of Gastroenterology 2023 Annual Ameeting. A brief description of the algorithm's rationale and underlying methods follow.
 
-Objective: Newer computational phenotype algorithms are developed due to unstable ICD code mapping in structured electronic health records (EHR), leading to looking the source of truth in clinical notes written by experts. Nonalcoholic steatohepatitis (NASH) is a chronic liver disease characterized by the accumulation of fat in the liver resulting liver inflammation and damage. For accurate identification of NASH diagnosis, that must be made by an expert in this disease, namely a board-certified or board-eligible gastroenterologist or hepatologist with an active clinical practice that includes this patient population. Thus, the source of truth concerning this diagnosis will be the clinical notes authored by these clinicians. The study objective is to develop a natural language processing (NLP) method to computationally ascertain this from the notes.
+# Background, Rationale: 
 
-Methods: We developed an NLP method using clinical notes written by experts from hepatology department. Initially notes were processed into different sections using regular expressions and MedSpacy sectionizer tool. The notes were further filtered with the condition of a specific section called ‘Assessment and Plan’ using regular expression based searching.  Next, we looked for the mention of ‘NASH’ in this specific section using regular expression based keyword searching. Again the notes are filtered based on the condition of author of the note as a specialist. Finally, among multiple notes for each patient the earliest NASH mention is identified and used as index date of the NASH cohort.
+* Nonalcoholic fatty liver disease (NAFLD) is the most common chronic liver disease in western countries and is growing in prevalance around the world. Nonalcoholic steatohepatitis (NASH) is an inflammatory subtype of NAFLD that leads to progressive liver injury and liver failure. The diagnosis of NASH typically requires an expert assessment of all available clinical data, which sometimes includes liver histopathology. 
+* Diagnoses in electronic health records (EHR) systems are commonly coded using systems like ICD-10. However these coding systems have well known inaccuracies, necessitating more accurate methods of disease ascertainment. Clinical notes authored by expert physicians are a superior source of truth on the presence of NASH, but have historically been underutilzed due to the absence of valdiated natural langauge processing (NLP) algorithms. 
+* We developed an algorithm for developing a retrospective, EHR-based cohort of patients with NASH, and identifying the earliest date at which this diagnosis was made within the EHR system (i.e. index date)
+
+# Notes:
+* The input for this algorithm is an outpatient clinical note that has been authored by a board-eligible/board-certified hepatologist. 
+* This algorithm has been internally validated at the University of California, San Francisco (UCSF) but has not yet been tested at other centers.
+* This algorithm should only be used on patient encounters prior to liver transplantation.
+
+# Method:
+* Outpatient clinical notes authored by hepatology physicians at UCSF were extracted using queries of an EHR database. These notes had been subjected to machine redaction of protected health information prior to the development of our algorithm.
+* First, we identified the ‘Assessment and Plan’ sectin of these notes using regular expressions and MedSpacy sectionizer tool.
+* Next, we identified mentions of NASH or its synonyms, using regular expressions and named entity recognition. The detection of NASH in this section was interpreted as evidence that this diagnosis exists as of the date that the corresponding note was written.
+* This method was applied to all notes across the patient timeline. The earliest date at which NASH was asserted in a note is inferred as corresponding to the index date.
 
