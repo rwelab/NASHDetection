@@ -35,9 +35,6 @@ This method was applied to all notes across the patient timeline. The earliest d
  **Installation**: 
 Check, reuirements.txt and installation and dependencies.txt files
 
-
-
-
 ## Installation
 
 Here are the steps to install and set up the project locally:
@@ -48,17 +45,15 @@ Here are the steps to install and set up the project locally:
 
 ## Usage
 
-
 ```bash
 # Run the script
 python NASH_Detection.py #algorithm to detect NASH mentions
 
 ```
-
 ##Sample data
 
 The algorithm expects unstractured data with ids in comma seperated (.csv) file.
-Exmaple
+Example
 Id,Note_text
 P01,"The patient is consulted for....."
 
